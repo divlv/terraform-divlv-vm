@@ -26,7 +26,6 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes = [
     var.subnet_address_space
   ]
-
 }
 
 resource "azurerm_subnet_network_security_group_association" "vnet-subnet" {
