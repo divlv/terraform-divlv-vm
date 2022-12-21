@@ -9,6 +9,5 @@ output "vm_static_ip" {
 
 
 output "vm_domain_name" {
-  count = var.assing_domain_name ? 1 : 0
-  value = "${azurerm_dns_a_record.vm_domain[0].name}.${azurerm_dns_a_record.vm_domain[0].zone_name}"
+  value = var.assing_domain_name ? "${azurerm_dns_a_record.vm_domain[0].name}.${azurerm_dns_a_record.vm_domain[0].zone_name}" : "Domain name not assigned"
 }
