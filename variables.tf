@@ -11,12 +11,6 @@ variable "resource_group_name" {
 }
 
 
-variable "admin_ip" {
-  type = string
-  description = "The IP address of the workstation administrator (a.k.a your IP address)"
-}
-
-
 variable "dns_zone_resource_group_name" {
   type    = string
   default = "NoResourceGroup"
@@ -37,16 +31,6 @@ variable "domain_name" {
   default     = "myhost"
 }
 
-
-variable "network_address_space" {
-  type        = string
-  description = "The address space that is used by the virtual network. E.g. 10.0.0.0/16 which is 10.0.0.0 - 10.0.255.255"
-}
-
-variable "subnet_address_space" {
-  type        = string
-  description = "The address space that is used by the subnet. E.g. 10.0.1.0/24 which is 10.0.1.0 - 10.0.1.255"
-}
 
 variable "resource_tag" {
   type = string
@@ -78,6 +62,11 @@ variable "vm_admin_username" {
 variable "vm_admin_password" {
   default = "Unselfish76Daffodil65sponge19Passionate74Nifty96turtle25"
   type    = string
+}
+
+variable "vm_subnet_id" {
+  type        = string
+  description = "A Subnet ID to attach the virtual machine to. E.g. /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.Network/virtualNetworks/my-vnet/subnets/my-subnet"
 }
 
 variable "linux_vm" {

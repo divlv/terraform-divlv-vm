@@ -2,36 +2,37 @@
 //  Virtual network for VM
 ///////////////////////////
 
+# The Network will be a part of separate setup. E.g. this VM may be a part of existing VNet.
 
-resource "azurerm_virtual_network" "vnet" {
-  name = "${var.default_name_prefix}vmnet"
-  address_space = [
-    var.network_address_space
-  ]
+# resource "azurerm_virtual_network" "vnet" {
+#   name = "${var.default_name_prefix}vmnet"
+#   address_space = [
+#     var.network_address_space
+#   ]
 
-  resource_group_name = var.resource_group_name
-  location            = var.resource_group_location
+#   resource_group_name = var.resource_group_name
+#   location            = var.resource_group_location
 
-  tags = {
-    environment = "dev"
-  }
-}
+#   tags = {
+#     environment = "dev"
+#   }
+# }
 
 
-# Creating Default Subnet
-resource "azurerm_subnet" "subnet" {
-  name                 = "${var.default_name_prefix}subnet"
-  resource_group_name  = var.resource_group_name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes = [
-    var.subnet_address_space
-  ]
-}
+# # Creating Default Subnet
+# resource "azurerm_subnet" "subnet" {
+#   name                 = "${var.default_name_prefix}subnet"
+#   resource_group_name  = var.resource_group_name
+#   virtual_network_name = azurerm_virtual_network.vnet.name
+#   address_prefixes = [
+#     var.subnet_address_space
+#   ]
+# }
 
-resource "azurerm_subnet_network_security_group_association" "vnet-subnet" {
-  subnet_id                 = azurerm_subnet.subnet.id
-  network_security_group_id = azurerm_network_security_group.defaultnsgopen.id
-}
+# resource "azurerm_subnet_network_security_group_association" "vnet-subnet" {
+#   subnet_id                 = azurerm_subnet.subnet.id
+#   network_security_group_id = azurerm_network_security_group.defaultnsgopen.id
+# }
 
 
 

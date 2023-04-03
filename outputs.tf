@@ -1,10 +1,10 @@
 
 output "vm_static_ip" {
   depends_on = [
-    azurerm_public_ip.staticip
+    azurerm_public_ip.vmip
   ]
   # value = azurerm_nat_gateway_public_ip_association.s .appoutgoingip[0].ip_address
-  value = azurerm_public_ip.staticip[*].ip_address
+  value = azurerm_public_ip.vmip[*].ip_address
 }
 
 

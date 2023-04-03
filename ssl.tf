@@ -13,3 +13,5 @@
 #  ssl_state  = "SniEnabled"
 #  thumbprint = var.ssl_certificate_thumbprint
 #}
+
+// Most likely the SSL settings will be done on the App level, not here.

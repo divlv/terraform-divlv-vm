@@ -4,16 +4,16 @@
 
 
 resource "azurerm_network_interface" "vmnic" {
-  name                = "${var.default_name_prefix}posthogsvm-nic"
+  name                = "${var.default_name_prefix}vm-nic"
   resource_group_name = var.resource_group_name
   location            = var.resource_group_location
 
 
   ip_configuration {
     name                          = "${var.default_name_prefix}vm-ipconfig"
-    subnet_id                     = azurerm_subnet.subnet.id
+    subnet_id                     = var.vm_subnet_id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.staticip.id
+    public_ip_address_id          = azurerm_public_ip.vmip.id
   }
 
   tags = {
@@ -24,8 +24,6 @@ resource "azurerm_network_interface" "vmnic" {
 
 
 ##################### WINDOWS #####################################
-
-
 
 resource "azurerm_windows_virtual_machine" "winvm" {
   count               = var.windows_vm ? 1 : 0
@@ -81,10 +79,6 @@ SETTINGS
 ##################### LINUX ############################
 
 
-
-
-
-
 locals {
   admin_ssh_keys = {
     key1 = {
@@ -106,7 +100,6 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
   resource_group_name = var.resource_group_name
   location            = var.resource_group_location
   size                = var.vm_size
-
 
 
   network_interface_ids = [
@@ -131,9 +124,9 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
 
   source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
-    version   = "latest"
+    offer     = "0001-com-ubuntu-server-focal"
+    sku       = "20_04-lts-gen2"
+    version   = "20.04.202209200"
   }
 
   os_disk {
@@ -171,6 +164,3 @@ resource "azurerm_virtual_machine_data_disk_attachment" "datadisksforvm" {
   lun                = 1 + count.index
   caching            = "ReadWrite"
 }
-
-
-
