@@ -53,6 +53,10 @@ resource "azurerm_windows_virtual_machine" "winvm" {
     version   = "latest"
   }
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   tags = {
     environment = var.resource_tag
   }
@@ -135,6 +139,9 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
     storage_account_type = "Premium_LRS"
   }
 
+  identity {
+    type = "SystemAssigned"
+  }
 
   tags = {
     environment = var.resource_tag
